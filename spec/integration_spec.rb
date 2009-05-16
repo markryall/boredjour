@@ -4,13 +4,13 @@ module BoredJour
   describe BoredServer do
     it 'should find start server after starting it' do
       name = "name"
-      port = 7
-      @server = BoredServer.new(name,port)
+      port = 20
+      @server = BoredServer.new(name, port)
       @server.start
 
       @client = BoredClient.new
       servernames = []
-      @client.retrieve {|server| servernames << server.name}
+      @client.retrieve {|server| servernames << server.name }
       servernames.should include(name)
     end
   end

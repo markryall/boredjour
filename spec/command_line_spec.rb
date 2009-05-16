@@ -48,6 +48,38 @@ EOF
     end
   end
   
+  describe CommandLine, 'when asked to yearn' do
+    before do
+      @server = stub('server')
+      @user = stub('a user')
+      @port = stub('a port')
+      @task = stub('a task')
+      LonelyServer.stub!(:new).and_return(@server)
+      @server.stub!(:start)
+    end
+
+    it 'should create a server' do
+      LonelyServer.should_receive(:new).with(@user, @port, @task).and_return(@server)
+      CommandLine.run "yearn", @task, @user, @port
+    end
+    
+    it 'should use default port if one is not provided' do
+      LonelyServer.should_receive(:new).with(@user, 70001, @task).and_return(@server)
+      CommandLine.run "yearn", @task, @user
+    end
+
+    it 'should default to user from environment' do
+      ENV.should_receive(:[]).with('USER').and_return(@user)
+      LonelyServer.should_receive(:new).with(@user, 70001, @task).and_return(@server)
+      CommandLine.run "yearn", @task
+    end
+    
+    it 'should start the server' do
+      @server.should_receive(:start)
+      CommandLine.run "yearn", @task
+    end
+  end
+  
   describe CommandLine, 'when asked to seek' do
     before do
       @client = stub('client')

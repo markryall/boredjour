@@ -44,4 +44,44 @@ module BoredJour
       @server.start
     end
   end
+  
+  describe LonelyServer do
+    before do
+      @name = "name"
+      @port = 7
+      @task = "task"
+      @bonjour = stub('bonjour')
+      @publisher = stub('sinatra')
+      Notifier.stub!(:say)
+      Bonjour.stub!(:new).and_return(@bonjour)
+      Publisher.stub!(:new).and_return(@publisher)
+      @bonjour.stub!(:start_listening)
+      @publisher.stub!(:publish)
+      @server = LonelyServer.new(@name,@port, @task)
+    end
+
+    it 'should create a bonjour' do
+      Bonjour.should_receive(:new).and_return(@bonjour)
+      @server.start
+    end
+
+    it 'should tell bonjour to start listening' do
+      @bonjour.should_receive(:start_listening).with('_boredjour._tcp', @name, @port, "name's lonely server")
+      @server.start
+    end
+
+     it 'should tell publish to publish a bored message' do
+        @publisher.should_receive(:publish).with(@port, "name is looking for help with 'task'")
+        @server.start
+      end
+
+    it 'should send notification that it has started' do
+      Notifier.should_receive(:say).with('lonely server started')
+      @server.start
+    end
+  end
+  
+  
+  
+  
 end

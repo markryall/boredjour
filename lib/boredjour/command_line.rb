@@ -25,7 +25,11 @@ module BoredJour
      end
      
     def self.help
-      "You bastard\n"
+      <<EOF
+'boredjour yawn' to tell people you are bored
+'boredjour yearn <some task>' to tell people you are lonely and want help with a task
+'boredjour seek' to find all the bored and lonely people 
+EOF
     end
   end
 end

@@ -12,11 +12,12 @@ begin
     gemspec.email = "mark@ryall.name"
     gemspec.homepage = "http://github.com/markryall/boredjour"
     gemspec.description = "A bonjour server/client for discovering the bored"
-    gemspec.files = FileList["[A-Z]*", "{lib,spec}/**/*.{rb,cs}"]
-    gemspec.authors = ["Mark Ryall"]
+    gemspec.files = FileList["README", "{bin,lib}/**/*"]
+    gemspec.authors = ["Mark Ryall", "Perryn Fowler"]
     gemspec.rubyforge_project = 'gratis'
-    gemspec.executables      = %w(boredjour)
+    gemspec.executables      = %w(boredjour boredjour_ws)
     gemspec.add_dependency "dnssd", ">= 0.6.0"
+    gemspec.add_dependency "sinatra", ">= 0.9.1.1"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler"

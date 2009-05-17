@@ -30,18 +30,13 @@ module BoredJour
     end
 
     it 'should tell bonjour to start listening' do
-      @bonjour.should_receive(:start_listening).with('_boredjour._tcp', @name, @port, "name's bored server")
+      @bonjour.should_receive(:start_listening).with('_boredjour2._tcp', @name, @port, "name's bored server")
       @server.start
     end
 
-     it 'should tell publish to publish a bored message' do
+    it 'should tell publish to publish a bored message' do
         @publisher.should_receive(:publish).with(@port, "name is bored and looking for something to do")
         @server.start
-      end
-
-    it 'should send notification that it has started' do
-      Notifier.should_receive(:say).with('bored server started')
-      @server.start
     end
   end
   
@@ -66,22 +61,13 @@ module BoredJour
     end
 
     it 'should tell bonjour to start listening' do
-      @bonjour.should_receive(:start_listening).with('_boredjour._tcp', @name, @port, "name's lonely server")
+      @bonjour.should_receive(:start_listening).with('_boredjour2._tcp', @name, @port, "name's lonely server")
       @server.start
     end
 
-     it 'should tell publish to publish a bored message' do
+    it 'should tell publish to publish a bored message' do
         @publisher.should_receive(:publish).with(@port, "name is looking for help with 'task'")
         @server.start
-      end
-
-    it 'should send notification that it has started' do
-      Notifier.should_receive(:say).with('lonely server started')
-      @server.start
     end
   end
-  
-  
-  
-  
 end

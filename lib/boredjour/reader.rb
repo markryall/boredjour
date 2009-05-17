@@ -9,11 +9,14 @@ module BoredJour
     end
 
     def message
-      socket = Socket.new( AF_INET, SOCK_STREAM, 0 )
-      sockaddr = Socket.pack_sockaddr_in( @server.port, @server.host )
-      socket.connect( sockaddr )
-      socket.readline.chomp
-      socket.close
+      begin
+        socket = TCPSocket.new(@server.host, @server.port)
+        message=socket.readline.chomp
+        socket.close
+        message
+      rescue Exception => e
+        puts e.message
+      end
     end
   end
 end

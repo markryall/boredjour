@@ -2,10 +2,10 @@ require 'socket'
 
 module BoredJour
   class Publisher
+    include Socket::Constants
     def publish(port, message)
-       socket = Socket.new( Socket::Constants::AF_INET, Socket::Constants::SOCK_STREAM, 0 )
-       sockaddr = Socket.pack_sockaddr_in( port.to_i, '0.0.0.0' )
-       puts "binding to socket #{port}"
+       socket = Socket.new(AF_INET, SOCK_STREAM, 0)
+       sockaddr = Socket.pack_sockaddr_in( port.to_i, '0.0.0.0')
        socket.bind( sockaddr )
        
        at_exit do
@@ -15,8 +15,8 @@ module BoredJour
        begin
          while (true) do
            socket.listen( 5 )
-           client, client_sockaddr = socket.accept
-           client.puts message
+           client_socket, client_sockaddr = socket.accept
+           client_socket.puts message
          end
        rescue Exception
          puts 'may you live in peace'

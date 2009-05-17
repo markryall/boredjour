@@ -11,7 +11,7 @@ module BoredJour
     end  
       
     def start
-      Bonjour.new.start_listening('_boredjour._tcp', @name, @port, "#{@name}'s bored server")
+      Bonjour.new.start_listening('_boredjour2._tcp', @name, @port, "#{@name}'s bored server")
       Publisher.new.publish(@port, "#{@name} is bored and looking for something to do") 
     end
   end
@@ -26,7 +26,7 @@ module BoredJour
      end  
 
      def start
-       Bonjour.new.start_listening('_boredjour._tcp', @name, @port, "#{@name}'s lonely server")
+       Bonjour.new.start_listening('_boredjour2._tcp', @name, @port, "#{@name}'s lonely server")
        Publisher.new.publish(@port, "#{@name} is looking for help with '#{@task}'") 
      end
   end

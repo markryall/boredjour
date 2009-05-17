@@ -5,7 +5,7 @@ module BoredJour
     it 'should create readers from each discovered bonjour server' do
       @bonjour = stub('bonjour')
       Bonjour.stub!(:new).and_return(@bonjour)
-      each_server_stub = @bonjour.stub!(:each_server).with('_boredjour._tcp')
+      each_server_stub = @bonjour.stub!(:each_server).with('_boredjour2._tcp')
       
       readers = []
       (1..3).each do |index|

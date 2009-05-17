@@ -15,7 +15,7 @@ begin
     gemspec.files = FileList["README", "{bin,lib}/**/*"]
     gemspec.authors = ["Mark Ryall", "Perryn Fowler"]
     gemspec.rubyforge_project = 'gratis'
-    gemspec.executables      = %w(boredjour boredjour_ws)
+    gemspec.executables      = %w(boredjour)
     gemspec.add_dependency "dnssd", ">= 0.6.0"
     gemspec.add_dependency "sinatra", ">= 0.9.1.1"
   end
